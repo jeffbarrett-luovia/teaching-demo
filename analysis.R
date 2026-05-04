@@ -36,3 +36,13 @@ auc_lasso    <- auc(roc(y_test, pred_lasso, quiet = TRUE))
 cat("\n=== Test Set AUC ===\n")
 cat("Logistic regression:", round(auc_logistic, 4), "\n")
 cat("Lasso:             ", round(auc_lasso, 4), "\n")
+
+# --- ROC curve for Lasso ---
+roc_lasso <- roc(y_test, pred_lasso, quiet = TRUE)
+
+par(bty = "n")
+plot(roc_lasso, col = "blue", lwd = 2, main = "Lasso ROC Curve",
+     legacy.axes = TRUE, xlab = "1 - Specificity", ylab = "Sensitivity")
+legend("bottomright",
+       legend = paste("AUC =", round(auc(roc_lasso), 3)),
+       col = "blue", lwd = 2)
